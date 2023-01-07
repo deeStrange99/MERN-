@@ -18,10 +18,10 @@ const MainNavigation = props => {
     //controls the drawer visibility
     const [drawerIsOpen, setDrawerIsOpen] = useState(false)
 
-    const openDrawer = () => {
+    const  openDrawerHandler = () => {
         setDrawerIsOpen(true);
     }
-    const closeDrawer = () => {
+    const closeDrawerHandler = () => {
         setDrawerIsOpen(false);
     }
 
@@ -30,22 +30,23 @@ const MainNavigation = props => {
     return (
 
         //we using fragments because wecan not have two react components  
-        <>{drawerIsOpen && <Backdrop onClick={closeDrawer}/>}
-            {drawerIsOpen && (
-                 <SideDrawer>
+        <>{drawerIsOpen && <Backdrop onClick={closeDrawerHandler}/>}
+            
+                 <SideDrawer show={drawerIsOpen} onClick={closeDrawerHandler}> 
+                 {/* here we passing props from the CSSTransition in the Sidedrawer component */}
                 <nav className="main-navigation__drawer-nav">
                     <NavLinks />
                     {/* Navlink here is displaying navlinks vertically in the drawer */}
                 </nav>
             </SideDrawer>
-            )} 
+            
             {/* conditionally render the content */}
 
 
 
             <MainHeader>
                 {/* this properties will be rendered in props children, tus props.childre is a place holder for below content */}
-                <button className="main-navigation__menu-btn" onClick={openDrawer}>
+                <button className="main-navigation__menu-btn" onClick={ openDrawerHandler}>
                     <span />
                     <span />
                     <span />
